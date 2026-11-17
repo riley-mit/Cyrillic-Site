@@ -1,0 +1,32 @@
+.body {
+    background-color: coral;
+}
+
+.container {
+    background-color: coral;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 8fr 1fr;
+    grid-gap: 20px 20px;
+    grid-template-areas: "header header header"
+                        "photos drawing wordbank"
+                        "footer footer footer";
+    text-align: center;
+}
+
+#header {
+    grid-area: header;
+}
+#photos {
+    grid-area: photos;
+}
+#drawing {
+    grid-area: drawing;
+}
+#wordbank {
+    grid-area: wordbank;
+}
+#footer {
+    grid-area: footer;
+}
