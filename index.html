@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="style.css">
     <script src="js/main.js" defer></script>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <!-- Importing Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </HEAD>
 
 <BODY>
@@ -11,8 +15,8 @@
      <!-- Header is the top bar, then we have three columns, then a footer-->
     <div class="container">
         
-        <div id="header" style="text-align:left;margin:1em">
-            <a href="/settings.html"><img src="/images/settings.png" style="width:5em"></a>
+        <div id="header" style="text-align:left">
+            <a href="/settings.html"><img src="/images/settings.png" style="width:4em;margin-left:1em;margin-top:1em"></a>
         </div>
 
         <div id="photos">
@@ -21,10 +25,21 @@
         </div>
 
         <div id="middle">
-            <h2 id="letter-name"></h2>
+            <div class="letter-establish">
+                <h2>Letter:</h2>
+                <h2 id="letter-name"></h2>
+            </div>
             <div class="letter_row">
                 <button id="play-btn">&#9654;&#xFE0E; Play</button>
                 <div id="typed-letter"></div>
+            </div>
+            <div class="draw-area">
+                <canvas id="guide" width="400" height="400"></canvas>
+                <canvas id="pad" width="400" height="400"></canvas>
+                </div>
+                <div class="draw-buttons">
+                <button id="undo-btn">Undo</button>
+                <button id="clear-btn">Clear</button>
             </div>
         </div>
 
@@ -33,6 +48,7 @@
             <h3>Wordbank</h3>
             <ul id="word-list"></ul>
             </div>
+            <button id="case-btn">Show uppercase</button>
         </div>
         
         <div id="footer">

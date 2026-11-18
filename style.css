@@ -60,6 +60,13 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1em;
+    margin: 1em;
+}
+.letter-establish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
 }
 
 button {
@@ -75,4 +82,49 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+
+/* Drawing Canvas Code Below */
+.draw-area {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background: #ffffff;        /* the pure white surface */
+  border: 2px solid #999;
+  border-radius: 8px;
+  overflow: hidden;           /* keeps the canvases inside the rounded corners */
+}
+
+.draw-area canvas {
+  position: absolute;
+  inset: 0;                   /* stretch to fill the box */
+  width: 100%;
+  height: 100%;
+}
+
+#guide, #pad {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#guide {
+  opacity: 0.25;              /* the semi-transparent look */
+  pointer-events: none;       /* clicks pass through to the pad */
+}
+
+#pad {
+  touch-action: none;         /* stops the page scrolling while drawing on a touchscreen */
+  cursor: crosshair;
+}
+
+.draw-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
