@@ -112,8 +112,8 @@ const GUIDE_SIZE_LOWER = 300;
 
 // ---------- Scoring settings (tune these) ----------
 const TOLERANCE     = 40;     // total extra thickness; 40 means about 20px of leeway per side
-const MIN_PRECISION = 0.75;   // share of your ink that must be near the letter
-const MIN_COVERAGE  = 0.70;   // share of the letter that must have ink near it
+const MIN_PRECISION = 0.9;   // share of your ink that must be near the letter
+const MIN_COVERAGE  = 0.95;   // share of the letter that must have ink near it
 const ADVANCE_DELAY = 800;    // milliseconds of green flash before the next letter
 
 const drawArea = document.querySelector(".draw-area");
