@@ -1,28 +1,40 @@
 <HEAD>
     <!-- Author: Riley M -->
     <link rel="stylesheet" href="style.css">
+    <script src="js/main.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 </HEAD>
 
 <BODY>
     <!-- Setting up my flexboxes! -->
      <!-- Header is the top bar, then we have three columns, then a footer-->
     <div class="container">
+        
         <div id="header">
             <p>website icon</p>
         </div>
+
         <div id="photos">
             <h3>photos</h3>
             <div id="photo_1"><img></div>
             <div id="photo_1"><img></div>
         </div>
-        <div id="drawing">
-            <h3>LETTERNAME</h3>
+
+        <div id="middle">
+            <h2 id="letter-name"></h2>
+            <div id="typed-letter"></div>
+            <button id="play-btn">&#128227; Play</button>
         </div>
+
         <div id="wordbank">
             <h3>wordbank</h3>
+            <ul id="word-list"></ul>
         </div>
+        
         <div id="footer">
             <p>footer here!</p>
+            <button id="skip-btn">Skip</button>
         </div>
+
     </div>
 </BODY>

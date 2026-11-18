@@ -20,6 +20,7 @@
 }
 #photos {
     grid-area: photos;
+    img { max-width: 100%; }
 }
 #drawing {
     grid-area: drawing;
