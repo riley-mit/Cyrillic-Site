@@ -57,15 +57,17 @@ function renderPhotos() {
     const figure = document.createElement("figure");
 
     const img = document.createElement("img");
+    img.onerror = () => figure.remove();
     img.src = item.image;
     img.alt = item.meaning;                           // better alt text than before
 
     const caption = document.createElement("figcaption");
     caption.textContent = `${item.word} (${item.meaning})`;
-
-    figure.appendChild(img);
-    figure.appendChild(caption);
-    photosEl.appendChild(figure);
+    if (item.word) {
+      figure.appendChild(img);
+      figure.appendChild(caption);
+      photosEl.appendChild(figure);
+    }
   }
 }
 
