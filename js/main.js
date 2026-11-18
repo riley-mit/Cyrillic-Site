@@ -80,3 +80,4 @@ playBtn.addEventListener("click", () => {
   audioEl.currentTime = 0;     // restart from the beginning
   audioEl.play();
 });
+

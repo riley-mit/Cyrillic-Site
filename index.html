@@ -1,5 +1,6 @@
 <HEAD>
     <!-- Author: Riley M -->
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <script src="js/main.js" defer></script>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
@@ -10,29 +11,31 @@
      <!-- Header is the top bar, then we have three columns, then a footer-->
     <div class="container">
         
-        <div id="header">
-            <p>website icon</p>
+        <div id="header" style="text-align:left;margin:1em">
+            <a href="/settings.html"><img src="/images/settings.png" style="width:5em"></a>
         </div>
 
         <div id="photos">
-            <h3>photos</h3>
             <div id="photo_1"><img></div>
             <div id="photo_1"><img></div>
         </div>
 
         <div id="middle">
             <h2 id="letter-name"></h2>
-            <div id="typed-letter"></div>
-            <button id="play-btn">&#128227; Play</button>
+            <div class="letter_row">
+                <button id="play-btn">&#9654;&#xFE0E; Play</button>
+                <div id="typed-letter"></div>
+            </div>
         </div>
 
         <div id="wordbank">
-            <h3>wordbank</h3>
+            <div id="total_words">
+            <h3>Wordbank</h3>
             <ul id="word-list"></ul>
+            </div>
         </div>
         
         <div id="footer">
-            <p>footer here!</p>
             <button id="skip-btn">Skip</button>
         </div>
 
