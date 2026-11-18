@@ -110,7 +110,15 @@ const PEN_COLOR = "#222";
 const GUIDE_SIZE_UPPER = 260;   // font sizes in pixels for the guide letter
 const GUIDE_SIZE_LOWER = 300;
 
+// ---------- Scoring settings (tune these) ----------
+const TOLERANCE     = 40;     // total extra thickness; 40 means about 20px of leeway per side
+const MIN_PRECISION = 0.75;   // share of your ink that must be near the letter
+const MIN_COVERAGE  = 0.70;   // share of the letter that must have ink near it
+const ADVANCE_DELAY = 800;    // milliseconds of green flash before the next letter
 
+const drawArea = document.querySelector(".draw-area");
+let isAdvancing = false;      // true while the success flash is showing
+let advanceTimer = null;
 
 // ---------- Elements ----------
 const guideCanvas = document.getElementById("guide");
@@ -200,6 +208,9 @@ function redrawPad() {
 function clearDrawing() {
   strokes = [];
   currentStroke = null;
+  clearTimeout(advanceTimer);          // cancel a pending "next letter"
+  isAdvancing = false;
+  drawArea.classList.remove("correct");
   redrawPad();
 }
 
@@ -210,6 +221,7 @@ function undoStroke() {
 
 // ---------- Pointer events (mouse, touch, and stylus all work) ----------
 padCanvas.addEventListener("pointerdown", e => {
+  if (isAdvancing) return;
   padCanvas.setPointerCapture(e.pointerId);   // keep tracking if the pointer leaves the box
   currentStroke = [getPos(e)];
   strokes.push(currentStroke);
@@ -233,7 +245,55 @@ padCanvas.addEventListener("pointercancel", endStroke);
 document.getElementById("undo-btn").addEventListener("click", undoStroke);
 document.getElementById("clear-btn").addEventListener("click", clearDrawing);
 
-// ---------- Placeholder for later ----------
+// ---------- DRAWING SCORING ----------
+// Draws something on a hidden canvas and returns its raw pixel data
+function makeMask(drawFn) {
+  const c = document.createElement("canvas");
+  c.width = padCanvas.width;
+  c.height = padCanvas.height;
+  const cx = c.getContext("2d");
+  drawFn(cx);
+  return cx.getImageData(0, 0, c.width, c.height).data;
+}
+
+function scoreDrawing() {
+  const targetThin = makeMask(cx => drawTarget(cx, 0));
+  const targetFat  = makeMask(cx => drawTarget(cx, TOLERANCE));
+  const userThin   = makeMask(cx => drawStrokes(cx, PEN_WIDTH));
+  const userFat    = makeMask(cx => drawStrokes(cx, TOLERANCE));
+
+  let userInk = 0, userNearTarget = 0;
+  let targetInk = 0, targetNearUser = 0;
+
+  // The data is a flat list: R, G, B, A for pixel 0, then R, G, B, A for pixel 1...
+  // Starting at index 3 and jumping by 4 visits just the alpha (opacity) of every pixel.
+  for (let i = 3; i < userThin.length; i += 4) {
+    if (userThin[i] > 50) {                       // there is ink here
+      userInk++;
+      if (targetFat[i] > 50) userNearTarget++;    // ...and it is near the letter
+    }
+    if (targetThin[i] > 50) {                     // the letter is here
+      targetInk++;
+      if (userFat[i] > 50) targetNearUser++;      // ...and the user's ink is near it
+    }
+  }
+
+  if (userInk === 0 || targetInk === 0) return { precision: 0, coverage: 0 };
+  return {
+    precision: userNearTarget / userInk,
+    coverage: targetNearUser / targetInk
+  };
+}
+
 function checkAnswer() {
-  // scoring goes here: compare the strokes against the guide letter
+  if (isAdvancing || strokes.length === 0) return;
+
+  const { precision, coverage } = scoreDrawing();
+  console.log(`precision ${precision.toFixed(2)}, coverage ${coverage.toFixed(2)}`);
+
+  if (precision >= MIN_PRECISION && coverage >= MIN_COVERAGE) {
+    isAdvancing = true;
+    drawArea.classList.add("correct");
+    advanceTimer = setTimeout(() => showRandomLetter(), ADVANCE_DELAY);
+  }
 }
