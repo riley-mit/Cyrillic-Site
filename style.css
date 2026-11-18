@@ -128,3 +128,12 @@ textarea {
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
+
+/* For irrelevant sections like settings and credits lol */
+#main-page{
+    border:0.25em solid black;
+    background-color: #ffffff;
+    height:80%;
+    margin: 5%;
+    padding: 1em;
+}

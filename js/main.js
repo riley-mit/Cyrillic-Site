@@ -51,12 +51,21 @@ function renderLetter() {
 }
 
 function renderPhotos() {
-  photosEl.textContent = "";                        // clear the old photos
-  for (const path of currentLetter.images || []) {  // "or empty list" if none
+  photosEl.textContent = "";                          // clear the old photos
+
+  for (const item of currentLetter.images || []) {    // item = one {image, word, meaning}
+    const figure = document.createElement("figure");
+
     const img = document.createElement("img");
-    img.src = path;
-    img.alt = `Example for ${currentLetter.upper}`;
-    photosEl.appendChild(img);
+    img.src = item.image;
+    img.alt = item.meaning;                           // better alt text than before
+
+    const caption = document.createElement("figcaption");
+    caption.textContent = `${item.word} (${item.meaning})`;
+
+    figure.appendChild(img);
+    figure.appendChild(caption);
+    photosEl.appendChild(figure);
   }
 }
 
@@ -96,10 +105,12 @@ caseBtn.addEventListener("click", () => {
 
 //From here on out it's the drawing canvas code
 // ---------- Settings you can tune ----------
-const PEN_WIDTH = 12;
+const PEN_WIDTH = 30;
 const PEN_COLOR = "#222";
 const GUIDE_SIZE_UPPER = 260;   // font sizes in pixels for the guide letter
 const GUIDE_SIZE_LOWER = 300;
+
+
 
 // ---------- Elements ----------
 const guideCanvas = document.getElementById("guide");

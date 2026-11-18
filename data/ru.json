@@ -1,4 +1,4 @@
 [
-    {"upper": "А", "lower":"а", "name": "a", "audio": "audio/ru/a.ogg", "images": ["images/ru/a-1.png", "images/ru/a-2.png"], "words": [{ "word": "азбука", "meaning": "alphabet" }, { "word": "автобус", "meaning": "bus" }]}
-
+    {"upper": "А", "lower":"а", "name": "a", "audio": "audio/ru/a.ogg", "images": [{"image": "images/ru/a-1.png", "word": "sunset", "meaning": "sunset"}, {"image": "images/ru/a-2.png", "word":"shield", "meaning": "sunset"}], "words": [{ "word": "азбука", "meaning": "alphabet" }, { "word": "автобус", "meaning": "bus" }]},
+    {"upper": "Б", "lower":"б", "name": "бэ", "audio": "audio/ru/be.ogg", "images": [{"image": "images/ru/a-1.png", "word": "sunset", "meaning": "sunset"}, {"image": "images/ru/a-2.png", "word":"shield", "meaning": "sunset"}], "words": [{ "word": "азбука", "meaning": "alphabet" }, { "word": "автобус", "meaning": "bus" }]}
 ]
